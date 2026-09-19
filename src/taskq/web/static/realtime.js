@@ -115,7 +115,11 @@
                 .then(function (res) { return res.json(); })
                 .then(function (body) {
                     if (!pollingActive) return;
-                    if (body.progress_state && body.progress_seq > lastRenderedSeq) {
+                    if (
+                        body.progress_state &&
+                        body.progress_seq > 0 &&
+                        body.progress_seq > lastRenderedSeq
+                    ) {
                         lastRenderedSeq = body.progress_seq;
                         renderProgressEvent(body.progress_state);
                     }
